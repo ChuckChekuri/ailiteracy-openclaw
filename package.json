@@ -1,0 +1,41 @@
+{
+  "name": "openclaw-agents-481-07",
+  "version": "1.0.0",
+  "description": "Standardized Safe Setup for AI Discussions - CPSC 481.07",
+  "main": "index.js",
+  "scripts": {
+    "setup": "npm install && node -e \"const fs=require('fs'); if(!fs.existsSync('.env')) fs.copyFileSync('.env.example', '.env');\"",
+    "check": "powershell -ExecutionPolicy Bypass -File ./check-setup.ps1",
+    "onboard:win": "powershell -ExecutionPolicy Bypass -File ./run-openclaw.ps1 onboard",
+    "onboard:mac": "chmod +x run-openclaw.sh && ./run-openclaw.sh onboard",
+    "start:win": "powershell -ExecutionPolicy Bypass -File ./run-openclaw.ps1 gateway start",
+    "start:mac": "./run-openclaw.sh gateway start",
+    "restart:win": "powershell -Command \"Stop-Process -Name node -ErrorAction SilentlyContinue; npm run start:win\"",
+    "restart:mac": "pkill -f openclaw || true && npm run start:mac",
+    "logs": "powershell -Command \"Get-Content -Path ./state/logs/openclaw.log -Wait\""
+  },
+  "dependencies": {
+    "openclaw": "^2026.3.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "jest": "^29.7.0"
+  },
+  "scripts": {
+    "setup": "npm install && node -e \"const fs=require('fs'); if(!fs.existsSync('.env')) fs.copyFileSync('.env.example', '.env');\"",
+    "check": "powershell -ExecutionPolicy Bypass -File ./check-setup.ps1",
+    "onboard:win": "powershell -ExecutionPolicy Bypass -File ./run-openclaw.ps1 onboard",
+    "onboard:mac": "chmod +x run-openclaw.sh && ./run-openclaw.sh onboard",
+    "start:win": "powershell -ExecutionPolicy Bypass -File ./run-openclaw.ps1 gateway start",
+    "start:mac": "./run-openclaw.sh gateway start",
+    "restart:win": "powershell -Command \"Stop-Process -Name node -ErrorAction SilentlyContinue; npm run start:win\"",
+    "restart:mac": "pkill -f openclaw || true && npm run start:mac",
+    "logs": "powershell -Command \"Get-Content -Path ./state/logs/openclaw.log -Wait\"",
+    "test:unit": "jest --config=tests/jest.config.js --testPathPattern=unit",
+    "test:integration": "jest --config=tests/jest.config.js --testPathPattern=integration",
+    "test:e2e": "playwright test --config=tests/playwright.config.js",
+    "test:all": "node tests/test-runner.js --all",
+    "test:scenario": "node tests/test-runner.js --scenario=",
+    "test:coverage": "jest --config=tests/jest.config.js --coverage"
+  }
+}

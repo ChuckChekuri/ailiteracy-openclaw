@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "C:\\Users\\chuck\\Documents\\projects\\openclaw\\markdownlint-config-schema.json",
+  "title": "markdownlint configuration schema",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "description": "JSON Schema URI (expected by some editors)",
+      "type": "string",
+      "default": "https://raw.githubusercontent.com/DavidAnson/markdownlint/v0.40.0/schema/markdownlint-config-schema.json"
+    },
+    "default": {
+      "description": "Default state for all rules",
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "enum": [
+            "error",
+            "warning"
+          ]
+        }
+      ],
+      "default": true
+    },
+    "extends": {
+      "description": "Path to configuration file to extend",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rules": {
+      "description": "Rules configuration",
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "boolean",
+          "object"
+        ]
+      }
+    }
+  },
+  "additionalProperties": {
+    "type": [
+      "boolean",
+      "object"
+    ]
+  }
+}

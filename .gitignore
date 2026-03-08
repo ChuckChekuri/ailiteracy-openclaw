@@ -1,0 +1,6 @@
+node_modules/
+state/
+.env
+workspace/sessions/
+*.log
+setup-openclaw.ps1

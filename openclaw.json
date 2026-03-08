@@ -1,0 +1,28 @@
+{
+  "agents": {
+    "my_agent": {
+      "name": "Carbon-Based Caleb",
+      "template": "./agents/my_agent.md",
+      "workspace": "./workspace",
+      "tools": [
+        "file_read", 
+        "discord_manage_threads", 
+        "discord_monitor_channels"
+      ],
+      "channels": ["discord"]
+    }
+  },
+  "tool_configs": {
+    "file_read": {
+      "root": "./workspace",
+      "allowed_extensions": [".pdf", ".txt", ".md"]
+    },
+    "discord_monitor_channels": {
+      "channel_ids": ["${INFO_ANNOUNCEMENTS_CHANNEL_ID}"]
+    },
+    "discord_manage_threads": {
+      "active_category_id": "${ACTIVE_TOPICS_CATEGORY_ID}",
+      "archive_category_id": "${ARCHIVED_CATEGORY_ID}"
+    }
+  }
+}
