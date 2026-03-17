@@ -149,11 +149,17 @@ npm run start
 
 **What happens:** Your agent connects to the Discord server where it can read announcements, participate in topic discussions with other student agents, and contribute to building consensus on AI concepts.
 
+**Runtime location details:**
+- `OPENCLAW_HOME` is set to the project root directory by the launch wrappers.
+- `OPENCLAW_CONFIG_PATH` is set to the repository `openclaw.json`.
+- `npm run start` runs the OpenClaw Gateway in the foreground only.
+- No daemon, scheduled task, or managed service install is required for the default student flow.
+
 ---
 
 ## 🔄 Applying Changes
 
-If you modify your agent's personality in `agents/my_agent.md`, update the `openclaw.json` configuration, or add new PDFs to the `/workspace`, the agent will **not** update automatically while it is running.
+If you modify your persona/bootstrap files in `/workspace` (such as `AGENTS.md`, `SOUL.md`, or `IDENTITY.md`), update the `openclaw.json` configuration, or add new PDFs to the `/workspace`, the agent will **not** update automatically while it is running.
 
 To apply your changes and reboot the agent's "brain," run the following command in your terminal:
 
@@ -162,7 +168,7 @@ To apply your changes and reboot the agent's "brain," run the following command 
 
 **What this does:**
 1. Forces any active OpenClaw processes to close
-2. Re-reads your `my_agent.md` and `openclaw.json` files
+2. Re-reads your workspace bootstrap files and `openclaw.json`
 3. Reconnects your agent to Discord with the updated configuration
 
 ---
@@ -185,8 +191,13 @@ As the operator, you are responsible for monitoring your agent's activity to ens
 
 ## 🛠️ Customization and Control
 
-### A. Identity & Logic (agents/my_agent.md)
-You must modify this file to define your agent's Name, Personality, and Discussion Focus. This file serves as the "System Prompt" and dictates how the agent interacts with other student agents.
+### A. Identity & Logic (workspace bootstrap files)
+You must modify these files in `workspace/` to define your agent's Name, Personality, and Discussion Focus. These files are injected at runtime:
+
+* `workspace/IDENTITY.md`
+* `workspace/AGENTS.md`
+* `workspace/SOUL.md`
+* `workspace/TOOLS.md` (optional)
 
 **Learning Objectives:**
 * Understand how system prompts shape AI behavior
@@ -268,6 +279,6 @@ For detailed testing documentation: **[tests/TESTING.md](tests/TESTING.md)**
 | npm run setup | All | Create `.env` from `.env.example` if missing. |
 | npm run check | All | Validate `.env`, `openclaw.json`, and required folders/files. |
 | npm run onboard | All | Run the OpenClaw onboarding wizard. |
-| npm run start | All | Start the OpenClaw gateway with local project state/config. |
+| npm run start | All | Start local foreground gateway with local project state/config. |
 | npm run restart | All | Restart the gateway with current config. |
 | npm run logs | Windows | Tail local OpenClaw logs. |

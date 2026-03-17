@@ -9,7 +9,6 @@
         "default": true,
         "name": "Carbon-Based Caleb",
         "workspace": "./workspace",
-        "agentDir": "./agents",
         "identity": {
           "name": "Carbon-Based Caleb"
         }

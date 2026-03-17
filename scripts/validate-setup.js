@@ -64,6 +64,17 @@ function ensureDirectory(dirPath, errors) {
   }
 }
 
+function ensureFile(filePath, defaultContent, errors) {
+  try {
+    if (!fs.existsSync(filePath)) {
+      fs.writeFileSync(filePath, defaultContent, "utf8");
+      console.log(`[check] Created missing file: ${path.relative(process.cwd(), filePath)}`);
+    }
+  } catch (error) {
+    errors.push(`Unable to create required file ${filePath}: ${error.message}`);
+  }
+}
+
 function main() {
   const root = process.cwd();
   const errors = [];
@@ -104,13 +115,24 @@ function main() {
     }
   }
 
-  const agentPath = path.join(root, "agents", "my_agent.md");
-  if (!fs.existsSync(agentPath)) {
-    errors.push("Missing agent file at agents/my_agent.md.");
-  }
+  const workspacePath = path.join(root, "workspace");
+  ensureDirectory(workspacePath, errors);
 
-  ensureDirectory(path.join(root, "workspace"), errors);
-  ensureDirectory(path.join(root, "state"), errors);
+  ensureFile(
+    path.join(workspacePath, "IDENTITY.md"),
+    "# Identity\n\nName: Carbon-Based Caleb\nEmoji: :lobster:\n",
+    errors,
+  );
+  ensureFile(
+    path.join(workspacePath, "AGENTS.md"),
+    "# AGENTS\n\nDefine your agent behavior and collaboration style here.\n",
+    errors,
+  );
+  ensureFile(
+    path.join(workspacePath, "SOUL.md"),
+    "# SOUL\n\nDefine persona, voice, and reasoning preferences here.\n",
+    errors,
+  );
 
   if (errors.length > 0) {
     console.error("\n[check] Setup validation failed:\n");
