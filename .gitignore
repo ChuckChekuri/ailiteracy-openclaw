@@ -1,6 +1,11 @@
 node_modules/
 state/
+.openclaw/
+
+# Env files
 .env
+.env*.local
+
 workspace/sessions/
 *.log
 setup-openclaw.ps1

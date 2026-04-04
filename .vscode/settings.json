@@ -1,0 +1,18 @@
+{
+    "accessibility.signals.chatResponseReceived": {
+        "sound": "off"
+    },
+    "accessibility.signals.chatUserActionRequired": {
+        "sound": "off"
+    },
+    "workbench.colorTheme": "GitHub Dark",
+    "compile-hero.disable-compile-files-on-did-save-code": false,
+    "jest.runMode": "on-demand",
+    "openclaw.cli.path": "c:\\Users\\chuck\\projects\\ailiteracy-openclaw\\node_modules\\.bin\\openclaw",
+    "openclawStudio.cliBinary": "npx openclaw",
+    "openclawStudio.sponsorNudgeDismissed": true,
+    "openclaw.command": "npx openclaw",
+    "openclaw.hardening.command": "npx openclaw",
+    "openclaw.autoConnect": true,
+    "openclaw.chat.models": []
+}

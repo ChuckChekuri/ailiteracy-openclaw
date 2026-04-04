@@ -1,6 +1,7 @@
 {
   "name": "openclaw-agents-481-07",
   "version": "1.0.0",
+  "type": "module",
   "description": "Standardized Safe Setup for AI Discussions - CPSC 481.07",
   "main": "index.js",
   "scripts": {
@@ -26,7 +27,9 @@
     "test:coverage": "jest --config=tests/jest.config.js --coverage"
   },
   "dependencies": {
-    "openclaw": "^2026.3.2"
+    "acpx": "^0.4.0",
+    "openclaw": "^2026.3.2",
+    "openclaw-studio": "^0.0.12"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",

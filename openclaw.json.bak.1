@@ -1,0 +1,249 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.24",
+    "lastTouchedAt": "2026-03-30T06:05:32.491Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-03-29T15:07:00.131Z",
+    "lastRunVersion": "2026.3.24",
+    "lastRunCommand": "onboard",
+    "lastRunMode": "local"
+  },
+  "auth": {
+    "profiles": {
+      "openai:default": {
+        "provider": "openai",
+        "mode": "api_key"
+      },
+      "groq:default": {
+        "provider": "groq",
+        "mode": "api_key"
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "custom-api-groq-com": {
+        "baseUrl": "https://api.groq.com/openai/v1",
+        "apiKey": "${GROQ_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "openai/gpt-oss-120b",
+            "name": "gpt-oss-120b (Custom Provider)",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 131072,
+            "maxTokens": 65536
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "custom-api-groq-com/openai/gpt-oss-120b"
+      },
+      "models": {
+        "openai/gpt-5.1-codex": {
+          "alias": "GPT"
+        },
+        "openai/gpt-4o": {},
+        "openai/gpt-oss-120b": {},
+        "custom-api-groq-com/openai/gpt-oss-120b": {
+          "alias": "openclaw-groq"
+        }
+      },
+      "workspace": "./workspace",
+      "compaction": {
+        "mode": "safeguard"
+      }
+    },
+    "list": [
+      {
+        "id": "my_agent",
+        "default": true,
+        "name": "Teaching Assistant",
+        "workspace": "./workspace",
+        "identity": {
+          "name": "Teaching Assistant"
+        }
+      }
+    ]
+  },
+  "tools": {
+    "profile": "messaging",
+    "allow": [
+      "web_search",
+      "read"
+    ],
+    "web": {
+      "search": {
+        "enabled": true,
+        "provider": "exa"
+      }
+    }
+  },
+  "bindings": [
+    {
+      "agentId": "my_agent",
+      "match": {
+        "channel": "discord"
+      }
+    }
+  ],
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "session": {
+    "dmScope": "per-channel-peer"
+  },
+  "channels": {
+    "discord": {
+      "enabled": true,
+      "token": "${DISCORD_TOKEN}",
+      "allowBots": true,
+      "groupPolicy": "allowlist",
+      "streaming": "off",
+      "dmPolicy": "open",
+      "allowFrom": [
+        "*"
+      ],
+      "guilds": {
+        "1478915631016448020": {
+          "channels": {
+            "1480106512813654036": {},
+            "1479995367754960946": {},
+            "1478915632723398961": {}
+          }
+        }
+      }
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "${OPENCLAW_GATEWAY_TOKEN}"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    }
+  },
+  "skills": {
+    "install": {
+      "nodeManager": "npm"
+    },
+    "entries": {
+      "1password": {
+        "enabled": false
+      },
+      "apple-notes": {
+        "enabled": false
+      },
+      "apple-reminders": {
+        "enabled": false
+      },
+      "bear-notes": {
+        "enabled": false
+      },
+      "bluebubbles": {
+        "enabled": false
+      },
+      "coding-agent": {
+        "enabled": false
+      },
+      "eightctl": {
+        "enabled": false
+      },
+      "gh-issues": {
+        "enabled": false
+      },
+      "gifgrep": {
+        "enabled": false
+      },
+      "github": {
+        "enabled": false
+      },
+      "node-connect": {
+        "enabled": false
+      },
+      "obsidian": {
+        "enabled": false
+      },
+      "openai-whisper": {
+        "enabled": false
+      },
+      "openai-whisper-api": {
+        "enabled": false
+      },
+      "openhue": {
+        "enabled": false
+      },
+      "ordercli": {
+        "enabled": false
+      },
+      "peekaboo": {
+        "enabled": false
+      },
+      "sag": {
+        "enabled": false
+      },
+      "sherpa-onnx-tts": {
+        "enabled": false
+      },
+      "skill-creator": {
+        "enabled": false
+      },
+      "songsee": {
+        "enabled": false
+      },
+      "sonoscli": {
+        "enabled": false
+      },
+      "spotify-player": {
+        "enabled": false
+      },
+      "things-mac": {
+        "enabled": false
+      },
+      "tmux": {
+        "enabled": false
+      },
+      "trello": {
+        "enabled": false
+      },
+      "video-frames": {
+        "enabled": false
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "exa": {
+        "enabled": true,
+        "config": {
+          "webSearch": {
+            "apiKey": "${EXA_API_KEY}"
+          }
+        }
+      }
+    }
+  }
+}

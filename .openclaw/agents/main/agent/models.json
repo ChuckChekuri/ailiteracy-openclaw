@@ -54,6 +54,30 @@
         }
       ],
       "apiKey": "ollama-local"
+    },
+    "custom-api-groq-com": {
+      "baseUrl": "https://api.groq.com/openai/v1",
+      "apiKey": "${GROQ_API_KEY}",
+      "api": "openai-completions",
+      "models": [
+        {
+          "id": "openai/gpt-oss-120b",
+          "name": "gpt-oss-120b (Custom Provider)",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "contextWindow": 131072,
+          "maxTokens": 65536,
+          "api": "openai-completions"
+        }
+      ]
     }
   }
 }

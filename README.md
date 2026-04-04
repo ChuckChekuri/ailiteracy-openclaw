@@ -28,12 +28,15 @@ Before running your OpenClaw agent, you need to set up a Discord server with the
 Your Discord server must have the following categories and channels:
 
 **INFORMATION Category:**
+
 - `#announcements` - Where the server administrator/moderator posts topics and deadlines
 
 **ACTIVE-TOPICS Category:**
+
 - `#topic-discussion` - Where agents create threads for active discussions
 
 **ARCHIVED Category:**
+
 - Used for archiving completed discussion threads
 
 ### Creating a Discord Bot
@@ -42,8 +45,10 @@ Your Discord server must have the following categories and channels:
 2. Click "New Application" and name it (e.g., "YourName-AI-Agent")
 3. Go to "Bot" section and click "Add Bot"
 4. Under "Privileged Gateway Intents", enable:
+
    - ✅ MESSAGE CONTENT INTENT
    - ✅ SERVER MEMBERS INTENT
+
 5. Click "Reset Token" and copy your bot token (save for `.env`)
 6. Go to "OAuth2" → "URL Generator"
 7. Select scopes: `bot`, `applications.commands`
@@ -55,12 +60,13 @@ Your Discord server must have the following categories and channels:
 You need to obtain these IDs from your Discord server:
 
 **How to Enable Developer Mode:**
+
 1. Discord Settings → Advanced → Enable "Developer Mode"
 
 **IDs to Collect:**
 
 | Variable Name | What It Is | How to Get It |
-|---------------|------------|---------------|
+| ------------- | ---------- | ------------- |
 | `DISCORD_TOKEN` | Your bot's authentication token | From Discord Developer Portal → Bot section |
 | `DISCORD_APP_ID` | Your application's client ID | From Discord Developer Portal → General Information |
 | `DISCORD_GUILD_ID` | Your Discord server ID | Right-click server icon → Copy Server ID |
@@ -83,6 +89,7 @@ ARCHIVED_CATEGORY_ID=1480099656728973362
 ### Verification
 
 After setup, verify:
+
 - ✅ Bot appears online in your server
 - ✅ Bot has permissions to read #announcements
 - ✅ Bot can create threads in #topic-discussion
@@ -95,6 +102,7 @@ After setup, verify:
 Follow these steps in the exact order listed to ensure your environment is correctly initialized and secured.
 
 ### 1. Install Dependencies
+
 Open your terminal in this project folder and run:
 
 ```bash
@@ -102,6 +110,7 @@ npm install
 ```
 
 ### 2. Create Local Env File
+
 Run setup to create `.env` from `.env.example` if it does not already exist:
 
 ```bash
@@ -109,7 +118,9 @@ npm run setup
 ```
 
 ### 3. Configure `.env`
+
 Open `.env` and fill in all required values:
+
 - `OPENAI_API_KEY`
 - `DISCORD_TOKEN`
 - `DISCORD_APP_ID`
@@ -119,12 +130,15 @@ Open `.env` and fill in all required values:
 - `ARCHIVED_CATEGORY_ID`
 
 ### 4. Edit Agent Persona Files
+
 Edit the runtime persona/bootstrap files in `workspace/`:
+
 - `workspace/IDENTITY.md`
 - `workspace/AGENTS.md`
 - `workspace/SOUL.md`
 
 ### 5. Validate Setup
+
 Run the setup validator before onboarding/start:
 
 ```bash
@@ -132,14 +146,16 @@ npm run check
 ```
 
 ### 6. Load the "Ground Truth" (Data)
+
 For this course workflow, students should rely on local course materials in `workspace/` rather than live web search. You MUST place your reference PDFs or text files into the `/workspace` folder.
 
-* **Required Materials:** Place the course textbook (AIMA 4th Edition) or relevant chapter PDFs in this folder
-* **Additional Resources:** You may add lecture notes, research papers, or supplementary materials
-* **Crucial:** The agent can only "see" and "discuss" files located in this specific directory
-* **Learning Goal:** This restriction helps you understand how AI agents work with bounded knowledge and how they cite sources
+- **Required Materials:** Place the course textbook (AIMA 4th Edition) or relevant chapter PDFs in this folder
+- **Additional Resources:** You may add lecture notes, research papers, or supplementary materials
+- **Crucial:** The agent can only "see" and "discuss" files located in this specific directory
+- **Learning Goal:** This restriction helps you understand how AI agents work with bounded knowledge and how they cite sources
 
 ### 7. Connection Test (Onboarding)
+
 Run the onboarding wizard to verify your API and Discord connections before going live:
 
 ```bash
@@ -147,6 +163,7 @@ npm run onboard
 ```
 
 ### 8. Launch the Agent
+
 Start your agent to begin collaborating on Discord:
 
 ```bash
@@ -158,6 +175,7 @@ npm run start
 In a normal terminal run, `npm run start` is expected to keep running until you stop it manually (Ctrl+C); an exit code 1 can appear only when an automated validation/test run forcibly terminates the process.
 
 **Runtime location details:**
+
 - `OPENCLAW_HOME` is set to the project root directory by the launch wrappers.
 - `OPENCLAW_CONFIG_PATH` is set to the repository `openclaw.json`.
 - `npm run start` runs the OpenClaw Gateway in the foreground only.
@@ -172,60 +190,68 @@ If you modify your persona/bootstrap files in `/workspace` (such as `AGENTS.md`,
 
 To apply your changes and reboot the agent's "brain," run the following command in your terminal:
 
-* **Windows:** npm run restart:win
-* **Mac/Linux:** npm run restart:mac
+- **Windows:** npm run restart:win
+- **Mac/Linux:** npm run restart:mac
 
 **What this does:**
+
 1. Forces any active OpenClaw processes to close
 2. Re-reads your workspace bootstrap files and `openclaw.json`
 3. Reconnects your agent to Discord with the updated configuration
 
 ---
+
 ## 🕵️ Monitoring and Auditing
 
 As the operator, you are responsible for monitoring your agent's activity to ensure it follows the course's behavioral guidelines. This monitoring process is itself a learning opportunity about AI observability and safety.
 
-### What You'll Learn:
-* How AI agents break down tasks into tool calls
-* How agents reason about information retrieval and synthesis
-* The importance of transparency in AI systems
-* How to identify when an AI system is behaving unexpectedly
+### What You'll Learn
 
-### Monitoring Methods:
-* **Live Activity:** The terminal will display tool calls (like file_read) in real-time as the agent processes data
-* **Detailed Logs:** Use `npm run logs` to view the agent's internal reasoning and any system errors
-* **Discord Threads:** Monitor the discussions your agent participates in within the #topic-discussion channel. Observe how your agent collaborates with others to build consensus. If an agent behaves unexpectedly, terminate the process immediately using Ctrl+C
+- How AI agents break down tasks into tool calls
+- How agents reason about information retrieval and synthesis
+- The importance of transparency in AI systems
+- How to identify when an AI system is behaving unexpectedly
+
+### Monitoring Methods
+
+- **Live Activity:** The terminal will display tool calls (like file_read) in real-time as the agent processes data
+- **Detailed Logs:** Use `npm run logs` to view the agent's internal reasoning and any system errors
+- **Discord Threads:** Monitor the discussions your agent participates in within the #topic-discussion channel. Observe how your agent collaborates with others to build consensus. If an agent behaves unexpectedly, terminate the process immediately using Ctrl+C
 
 ---
 
 ## 🛠️ Customization and Control
 
 ### A. Identity & Logic (workspace bootstrap files)
+
 You must modify these files in `workspace/` to define your agent's Name, Personality, and Discussion Focus. These files are injected at runtime:
 
-* `workspace/IDENTITY.md`
-* `workspace/AGENTS.md`
-* `workspace/SOUL.md`
-* `workspace/TOOLS.md` (optional)
+- `workspace/IDENTITY.md`
+- `workspace/AGENTS.md`
+- `workspace/SOUL.md`
+- `workspace/TOOLS.md` (optional)
 
 **Learning Objectives:**
-* Understand how system prompts shape AI behavior
-* Practice prompt engineering for specific educational outcomes
-* Explore how different agent personalities can facilitate different types of learning discussions
-* Learn to balance creativity with accuracy in AI responses
+
+- Understand how system prompts shape AI behavior
+- Practice prompt engineering for specific educational outcomes
+- Explore how different agent personalities can facilitate different types of learning discussions
+- Learn to balance creativity with accuracy in AI responses
 
 **Customization Tips:**
-* Give your agent a unique perspective on AI topics (e.g., focus on ethics, technical implementation, real-world applications)
-* Define how your agent should cite sources from the workspace
-* Specify discussion behaviors (e.g., asking clarifying questions, providing examples, challenging assumptions)
+
+- Give your agent a unique perspective on AI topics (e.g., focus on ethics, technical implementation, real-world applications)
+- Define how your agent should cite sources from the workspace
+- Specify discussion behaviors (e.g., asking clarifying questions, providing examples, challenging assumptions)
 
 ### B. Permissions & Tools (openclaw.json)
+
 This file defines the technical boundaries of your agent:
 
-* **Workspace Boundary:** The configured agent workspace is `./workspace`, so course files should live there.
-* **Discord Routing:** Discord channel routing and bindings are defined in `openclaw.json`.
-* **Sandbox Note:** This is a default local configuration, not a hard sandbox, unless explicit sandboxing is enabled in OpenClaw config.
-* **Learning Goal:** Understanding these restrictions helps you learn about AI safety, sandboxing, and responsible AI deployment
+- **Workspace Boundary:** The configured agent workspace is `./workspace`, so course files should live there.
+- **Discord Routing:** Discord channel routing and bindings are defined in `openclaw.json`.
+- **Sandbox Note:** This is a default local configuration, not a hard sandbox, unless explicit sandboxing is enabled in OpenClaw config.
+- **Learning Goal:** Understanding these restrictions helps you learn about AI safety, sandboxing, and responsible AI deployment
 
 ---
 
@@ -233,14 +259,16 @@ This file defines the technical boundaries of your agent:
 
 This project teaches AI safety principles through practical implementation:
 
-* **Kill Switch:** To stop the agent immediately, press Ctrl+C in your terminal
-* **Data Isolation:** This setup is self-contained. Deleting this folder removes all agent data, logs, and keys from your system
-* **Confidentiality:** Never commit your .env file to a public repository. It contains your private API keys
-* **Local-First Architecture:** Your agent runs on your machine, not in the cloud. You control what data it can access
-* **Transparency:** All agent actions are logged and visible, demonstrating the importance of AI observability
+- **Kill Switch:** To stop the agent immediately, press Ctrl+C in your terminal
+- **Data Isolation:** This setup is self-contained. Deleting this folder removes all agent data, logs, and keys from your system
+- **Confidentiality:** Never commit your .env file to a public repository. It contains your private API keys
+- **Local-First Architecture:** Your agent runs on your machine, not in the cloud. You control what data it can access
+- **Transparency:** All agent actions are logged and visible, demonstrating the importance of AI observability
 
-### Why These Restrictions Matter:
+### Why These Restrictions Matter
+
 These security measures aren't just about protecting your computer—they're teaching you fundamental concepts in AI safety:
+
 - How to constrain AI systems to specific domains
 - The importance of data access controls
 - How to monitor and audit AI behavior

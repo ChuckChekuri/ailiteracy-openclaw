@@ -34,7 +34,7 @@ if (fs.existsSync(envPath)) {
 ensureDirectory(workspacePath);
 ensureFile(
   path.join(workspacePath, "IDENTITY.md"),
-  "# Identity\n\nName: Carbon-Based Caleb\nEmoji: :lobster:\n",
+  "# Identity\n\nName: Teaching Assistant\nEmoji: :lobster:\n",
 );
 ensureFile(
   path.join(workspacePath, "AGENTS.md"),
