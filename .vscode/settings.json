@@ -1,0 +1,6 @@
+{
+    "accessibility.signals.chatResponseReceived": {
+        "sound": "off"
+    },
+    "jest.enable": false
+}

@@ -12,8 +12,8 @@ describe('Thread Management', () => {
   });
 
   test('agent creates thread in active category', async () => {
-    const config = require('../../openclaw.json');
-    const activeCategoryId = config.tool_configs.discord_manage_threads.active_category_id;
+    require('dotenv').config();
+    const activeCategoryId = process.env.ACTIVE_TOPICS_CATEGORY_ID;
     
     const thread = await discordMock.createThread(
       activeCategoryId,
@@ -55,8 +55,8 @@ describe('Thread Management', () => {
   });
 
   test('agent archives thread to correct category', async () => {
-    const config = require('../../openclaw.json');
-    const archiveCategoryId = config.tool_configs.discord_manage_threads.archive_category_id;
+    require('dotenv').config();
+    const archiveCategoryId = process.env.ARCHIVED_CATEGORY_ID;
     
     const thread = await discordMock.createThread(
       'active-category',

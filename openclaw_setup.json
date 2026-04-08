@@ -1,0 +1,193 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.2",
+    "lastTouchedAt": "2026-03-31T08:24:53.238Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-03-31T08:24:53.218Z",
+    "lastRunVersion": "2026.3.2",
+    "lastRunCommand": "doctor",
+    "lastRunMode": "local"
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "custom-api-groq-com": {
+        "baseUrl": "https://api.groq.com/openai/v1",
+        "apiKey": "${GROQ_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "openai/gpt-oss-120b",
+            "name": "openai/gpt-oss-120b (Custom Provider)",
+            "contextWindow": 16000,
+            "maxTokens": 4096
+          }
+        ]
+      },
+      "tailscale-ollama": {
+        "baseUrl": "http://chucks-mac-studio:11434/v1",
+        "apiKey": "ollama",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "qwen3-14b-edu-clean",
+            "name": "Qwen3 14B Edu Clean (Local Ollama)",
+            "contextWindow": 32000,
+            "maxTokens": 4096
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "tailscale-ollama/qwen3-14b-edu-clean",
+        "fallbacks": [
+          "custom-api-groq-com/openai/gpt-oss-120b"
+        ]
+      },
+      "models": {
+        "tailscale-ollama/qwen3-14b-edu-clean": {
+          "alias": "openclaw-ollama"
+        },
+        "custom-api-groq-com/openai/gpt-oss-120b": {
+          "alias": "openclaw-groq"
+        }
+      }
+    },
+    "list": [
+      {
+        "id": "instructor_agent",
+        "name": "Professor Chuck",
+        "workspace": "./workspace/instructor",
+        "identity": {
+          "name": "Professor Chuck"
+        }
+      },
+      {
+        "id": "ta_agent",
+        "name": "Teaching Assistant",
+        "workspace": "./workspace/ta",
+        "identity": {
+          "name": "TA Bot"
+        }
+      },
+      {
+        "id": "student_agent",
+        "name": "Student Bot",
+        "workspace": "./workspace/student",
+        "identity": {
+          "name": "Student Agent"
+        }
+      }
+    ]
+  },
+  "bindings": [
+    {
+      "agentId": "instructor_agent",
+      "match": {
+        "channel": "discord",
+        "accountId": "instructor"
+      }
+    },
+    {
+      "agentId": "ta_agent",
+      "match": {
+        "channel": "discord",
+        "accountId": "ta"
+      }
+    },
+    {
+      "agentId": "student_agent",
+      "match": {
+        "channel": "discord",
+        "accountId": "student"
+      }
+    }
+  ],
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "channels": {
+    "discord": {
+      "enabled": true,
+      "token": {
+        "source": "env",
+        "provider": "default",
+        "id": "TA_DISCORD_TOKEN"
+      },
+      "groupPolicy": "allowlist",
+      "streaming": "off",
+      "threadBindings": {
+        "enabled": true
+      },
+      "accounts": {
+        "instructor": {
+          "token": { "source" : "env", "provider": "default", "id" : "INSTRUCTOR_DISCORD_TOKEN"},
+          "groupPolicy": "allowlist",
+          "guilds": {
+            "1478915631016448020": {
+              "requireMention": true,
+              "channels": {
+                "1480106512813654036": {
+                  "allow": true,
+                  "requireMention": false
+                }
+              }
+            }
+          },
+          "streaming": "off"
+        },
+        "ta": {
+          "token": { "source" : "env", "provider": "default", "id" : "TA_DISCORD_TOKEN"},
+          "groupPolicy": "allowlist",
+          "guilds": {
+            "1478915631016448020": {
+              "requireMention": true
+            }
+          },
+          "streaming": "off"
+        },
+        "student": {
+          "token": { "source" : "env", "provider": "default", "id" : "STUDENT_DISCORD_TOKEN"},
+          "groupPolicy": "allowlist",
+          "guilds": {
+            "1478915631016448020": {
+              "requireMention": false,
+              "channels": {
+                "1479995367754960946": {
+                  "allow": true
+                },
+                "1478915632723398961": {
+                  "allow": true
+                }
+              }
+            }
+          },
+          "streaming": "off"
+        },
+        "default": {
+          "groupPolicy": "allowlist",
+          "dmPolicy": "open",
+          "allowFrom": [
+            "*"
+          ],
+          "streaming": "off"
+        }
+      }
+    }
+  },
+  "gateway": {
+    "mode": "local",
+    "port": 18777,
+    "auth": {
+      "mode": "token",
+      "token": "3dd9500027feef953ec2258c71c8477d7e5e47db3c26f3dd"
+    }
+  }
+}

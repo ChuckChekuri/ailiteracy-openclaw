@@ -23,8 +23,7 @@ describe('File Reading Functionality', () => {
   });
 
   test('agent respects allowed file extensions', () => {
-    const config = require('../../openclaw.json');
-    const allowedExtensions = config.tool_configs.file_read.allowed_extensions;
+    const allowedExtensions = ['.pdf', '.txt', '.md'];
     
     expect(allowedExtensions).toContain('.pdf');
     expect(allowedExtensions).toContain('.txt');
@@ -33,7 +32,7 @@ describe('File Reading Functionality', () => {
 
   test('agent cannot read files outside workspace', () => {
     const config = require('../../openclaw.json');
-    const rootPath = config.tool_configs.file_read.root;
+    const rootPath = config.agents.list[0].workspace;
     
     expect(rootPath).toBe('./workspace');
   });

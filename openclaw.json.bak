@@ -1,57 +1,610 @@
 {
-  "gateway": {
-    "mode": "local"
+  "meta": {
+    "lastTouchedVersion": "2026.3.28",
+    "lastTouchedAt": "2026-04-06T07:04:21.441Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-04-06T06:27:50.085Z",
+    "lastRunVersion": "2026.3.28",
+    "lastRunCommand": "configure",
+    "lastRunMode": "local"
+  },
+  "auth": {
+    "profiles": {
+      "openai:default": {
+        "provider": "openai",
+        "mode": "api_key"
+      },
+      "groq:default": {
+        "provider": "groq",
+        "mode": "api_key"
+      },
+      "default": {
+        "provider": "tailscale-ollama",
+        "mode": "token"
+      },
+      "openrouter:default": {
+        "provider": "openrouter",
+        "mode": "api_key"
+      },
+      "ollama:default": {
+        "provider": "ollama",
+        "mode": "api_key"
+      },
+      "tailscale-ollama:manual": {
+        "provider": "tailscale-ollama",
+        "mode": "token"
+      },
+      "ollama:manual": {
+        "provider": "ollama",
+        "mode": "token"
+      }
+    },
+    "order": {
+      "ollama": [
+        "ollama:default",
+        "default",
+        "ollama:manual"
+      ]
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "tailscale-ollama": {
+        "baseUrl": "http://chucks-mac-studio:11434/v1",
+        "apiKey": "ollama-local",
+        "auth": "api-key",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "qwen3-14b-edu-clean:latest",
+            "name": "Qwen3 14B Edu Clean (Tailscale Ollama)",
+            "contextWindow": 32000,
+            "maxTokens": 8192
+          }
+        ]
+      },
+      "custom-api-groq-com": {
+        "baseUrl": "https://api.groq.com/openai/v1",
+        "apiKey": "${GROQ_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "openai/gpt-oss-120b",
+            "name": "gpt-oss-120b (Groq fallback)"
+          }
+        ]
+      },
+      "ollama": {
+        "baseUrl": "http://chucks-mac-studio:11434",
+        "apiKey": "OLLAMA_API_KEY",
+        "api": "ollama",
+        "models": [
+          {
+            "id": "glm-4.7-flash",
+            "name": "glm-4.7-flash",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 128000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen3-14b-edu-strict:latest",
+            "name": "qwen3-14b-edu-strict:latest",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 40960,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen3-14b-edu-clean:latest",
+            "name": "qwen3-14b-edu-clean:latest",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 40960,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen3:14b",
+            "name": "qwen3:14b",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 40960,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen3-32b-128k:latest",
+            "name": "qwen3-32b-128k:latest",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 40960,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwen3:32b",
+            "name": "qwen3:32b",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 40960,
+            "maxTokens": 8192
+          },
+          {
+            "id": "gpt-oss:20b",
+            "name": "gpt-oss:20b",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 131072,
+            "maxTokens": 8192
+          },
+          {
+            "id": "llama3.2-vision:latest",
+            "name": "llama3.2-vision:latest",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 131072,
+            "maxTokens": 8192
+          },
+          {
+            "id": "minicpm-v:latest",
+            "name": "minicpm-v:latest",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 32768,
+            "maxTokens": 8192
+          },
+          {
+            "id": "qwq:latest",
+            "name": "qwq:latest",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 40960,
+            "maxTokens": 8192
+          },
+          {
+            "id": "mistral:latest",
+            "name": "mistral:latest",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 32768,
+            "maxTokens": 8192
+          }
+        ]
+      }
+    }
   },
   "agents": {
     "defaults": {
-      "workspace": "./workspace"
+      "model": {
+        "primary": "tailscale-ollama/qwen3-14b-edu-clean:latest"
+      },
+      "models": {
+        "tailscale-ollama/qwen3-14b-edu-clean:latest": {
+          "alias": "tailscale-ollama"
+        },
+        "openrouter/auto": {
+          "alias": "OpenRouter"
+        }
+      },
+      "workspace": "./workspace",
+      "memorySearch": {
+        "enabled": false
+      },
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "sandbox": {
+        "mode": "off"
+      }
     },
     "list": [
       {
-        "id": "my_agent",
-        "default": true,
-        "name": "Carbon-Based Caleb",
-        "workspace": "./workspace",
-        "identity": {
-          "name": "Carbon-Based Caleb"
+        "id": "ta",
+        "name": "ta",
+        "workspace": "C:\\Users\\chuck\\Documents\\projects\\openclaw_multiagent\\workspace\\ta",
+        "agentDir": "C:\\Users\\chuck\\Documents\\projects\\openclaw_multiagent\\agents\\ta",
+        "model": "openrouter/auto"
+      },
+      {
+        "id": "instructor",
+        "name": "Instructor Agent",
+        "workspace": "./workspace/instructor",
+        "agentDir": "./agents/instructor",
+        "model": {
+          "primary": "tailscale-ollama/qwen3-14b-edu-clean:latest"
+        }
+      },
+      {
+        "id": "student",
+        "name": "student",
+        "workspace": "C:\\Users\\chuck\\Documents\\projects\\openclaw_multiagent\\workspace\\student",
+        "agentDir": "C:\\Users\\chuck\\Documents\\projects\\openclaw_multiagent\\agents\\student",
+        "model": {
+          "primary": "tailscale-ollama/qwen3-14b-edu-clean:latest"
         }
       }
     ]
   },
+  "tools": {
+    "profile": "messaging",
+    "allow": [
+      "web_search",
+      "read"
+    ],
+    "web": {
+      "search": {
+        "enabled": true,
+        "provider": "exa"
+      },
+      "fetch": {
+        "enabled": true
+      }
+    }
+  },
   "bindings": [
     {
-      "agentId": "my_agent",
+      "agentId": "ta",
       "match": {
-        "channel": "discord"
+        "channel": "discord",
+        "accountId": "ta"
+      }
+    },
+    {
+      "agentId": "instructor",
+      "match": {
+        "channel": "discord",
+        "accountId": "instructor"
+      }
+    },
+    {
+      "agentId": "student",
+      "match": {
+        "channel": "discord",
+        "accountId": "student"
       }
     }
   ],
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
   "channels": {
     "discord": {
       "enabled": true,
-      "token": "${DISCORD_TOKEN}",
-      "dmPolicy": "disabled",
-      "guilds": {
-        "${DISCORD_GUILD_ID}": {
-          "requireMention": false,
-          "channels": {
-            "${INFO_ANNOUNCEMENTS_CHANNEL_ID}": {
-              "allow": true,
-              "requireMention": false
-            },
-            "${ACTIVE_TOPICS_CATEGORY_ID}": {
-              "allow": true,
-              "requireMention": false
-            },
-            "${ARCHIVED_CATEGORY_ID}": {
-              "allow": true,
-              "requireMention": false
+      "groupPolicy": "allowlist",
+      "streaming": "off",
+      "threadBindings": {
+        "enabled": true
+      },
+      "accounts": {
+        "ta": {
+          "token": "${TA_DISCORD_TOKEN}",
+          "groupPolicy": "allowlist",
+          "streaming": "off",
+          "guilds": {
+            "1478915631016448020": {
+              "channels": {
+                "1478915632723398961": {
+                  "allow": true,
+                  "requireMention": false
+                }
+              }
+            }
+          }
+        },
+        "instructor": {
+          "token": "${INSTRUCTOR_DISCORD_TOKEN}",
+          "groupPolicy": "allowlist",
+          "streaming": "off",
+          "guilds": {
+            "1478915631016448020": {
+              "channels": {
+                "1480106512813654036": {
+                  "allow": true,
+                  "requireMention": false
+                }
+              }
+            }
+          }
+        },
+        "student": {
+          "token": "${STUDENT_DISCORD_TOKEN}",
+          "groupPolicy": "allowlist",
+          "streaming": "off",
+          "guilds": {
+            "1478915631016448020": {
+              "channels": {
+                "1480106512813654036": {
+                  "allow": true,
+                  "requireMention": false
+                },
+                "1479995367754960946": {
+                  "allow": true,
+                  "requireMention": false
+                },
+                "1479933418966880318": {
+                  "allow": true,
+                  "requireMention": false
+                }
+              }
+            }
+          }
+        },
+        "default": {
+          "token": "${TA_DISCORD_TOKEN}",
+          "groupPolicy": "allowlist",
+          "streaming": "off",
+          "guilds": {
+            "1478915631016448020": {
+              "channels": {
+                "1478915632723398961": {
+                  "allow": true,
+                  "requireMention": false
+                }
+              }
             }
           }
         }
+      }
+    }
+  },
+  "gateway": {
+    "port": 18777,
+    "mode": "local",
+    "bind": "lan",
+    "controlUi": {
+      "enabled": true,
+      "allowedOrigins": [
+        "100.75.219.24:18777",
+        "localhost:18777",
+        "127.0.0.1:18777",
+        "192.168.68.106:18777",
+        "CHUCKWIN10:18777",
+        "chucks-mac-studio:18777",
+        "100.75.219.24:18777"
+      ]
+    },
+    "auth": {
+      "mode": "token",
+      "token": "${OPENCLAW_GATEWAY_TOKEN}"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    }
+  },
+  "skills": {
+    "entries": {
+      "apple-notes": {
+        "enabled": false
       },
-      "threadBindings": {
+      "apple-reminders": {
+        "enabled": false
+      },
+      "bear-notes": {
+        "enabled": false
+      },
+      "gemini": {
+        "enabled": false
+      },
+      "eightctl": {
+        "enabled": false
+      },
+      "gh-issues": {
+        "enabled": false
+      },
+      "gifgrep": {
+        "enabled": false
+      },
+      "github": {
+        "enabled": false
+      },
+      "gog": {
+        "enabled": false
+      },
+      "mcporter": {
+        "enabled": false
+      },
+      "model-usage": {
+        "enabled": false
+      },
+      "nano-pdf": {
         "enabled": true
+      },
+      "node-connect": {
+        "enabled": false
+      },
+      "obsidian": {
+        "enabled": false
+      },
+      "skill-creator": {
+        "enabled": false
+      },
+      "sherpa-onnx-tts": {
+        "enabled": false
+      },
+      "sag": {
+        "enabled": false
+      },
+      "peekaboo": {
+        "enabled": false
+      },
+      "slack": {
+        "enabled": false
+      },
+      "songsee": {
+        "enabled": false
+      },
+      "sonoscli": {
+        "enabled": false
+      },
+      "spotify-player": {
+        "enabled": false
+      },
+      "things-mac": {
+        "enabled": false
+      },
+      "tmux": {
+        "enabled": false
+      },
+      "trello": {
+        "enabled": false
+      },
+      "video-frames": {
+        "enabled": false
+      },
+      "voice-call": {
+        "enabled": false
+      },
+      "wacli": {
+        "enabled": false
+      },
+      "xurl": {
+        "enabled": false
+      },
+      "1password": {
+        "enabled": false
+      },
+      "blucli": {
+        "enabled": false
+      },
+      "camsnap": {
+        "enabled": false
+      },
+      "goplaces": {
+        "enabled": false
+      },
+      "imsg": {
+        "enabled": false
+      },
+      "openai-whisper": {
+        "enabled": false
+      },
+      "openhue": {
+        "enabled": false
+      },
+      "ordercli": {
+        "enabled": false
+      },
+      "summarize": {
+        "enabled": true
+      },
+      "session-logs": {
+        "enabled": false
+      },
+      "blogwatcher": {
+        "enabled": false
+      },
+      "discord": {
+        "enabled": false
+      },
+      "bluebubbles": {
+        "enabled": false
+      },
+      "openai-whisper-api": {
+        "enabled": false
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "exa": {
+        "enabled": true,
+        "config": {
+          "webSearch": {
+            "apiKey": "${EXA_API_KEY}"
+          }
+        }
       }
     }
   }

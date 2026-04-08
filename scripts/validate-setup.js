@@ -1,10 +1,8 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 
 const requiredEnvVars = [
   "OPENAI_API_KEY",
-  "DISCORD_TOKEN",
-  "DISCORD_APP_ID",
   "DISCORD_GUILD_ID",
   "INFO_ANNOUNCEMENTS_CHANNEL_ID",
   "ACTIVE_TOPICS_CATEGORY_ID",
@@ -53,73 +51,65 @@ function parseDotEnv(content) {
   return env;
 }
 
-function ensureDirectory(dirPath, errors) {
-  if (!fs.existsSync(dirPath)) {
-    errors.push(`Missing required directory: ${path.relative(process.cwd(), dirPath)}. Run \`npm run setup\`.`);
-  }
-}
-
-function ensureFile(filePath, errors) {
-  if (!fs.existsSync(filePath)) {
-    errors.push(`Missing required file: ${path.relative(process.cwd(), filePath)}. Run \`npm run setup\` to seed defaults, then edit it.`);
-  }
-}
-
 function main() {
   const root = process.cwd();
   const errors = [];
 
-  const envPath = path.join(root, ".env");
-  if (!fs.existsSync(envPath)) {
-    errors.push("Missing .env file. Run `npm run setup` first, then fill in .env values.");
+  // Check required directories
+  for (const dir of ["workspace", "agents", "shared"]) {
+    const dirPath = path.join(root, dir);
+    if (!fs.existsSync(dirPath)) {
+      errors.push(`Missing required directory: ${dir}. Run \`npm run setup\`.`);
+    }
   }
 
-  let env = {};
+  // Check required files
+  const requiredFiles = [
+    "openclaw.json",
+    "workspace/AGENTS.md",
+    "workspace/IDENTITY.md",
+    "workspace/SOUL.md",
+    "shared/schema.json",
+  ];
+
+  for (const file of requiredFiles) {
+    if (!fs.existsSync(path.join(root, file))) {
+      errors.push(`Missing required file: ${file}.`);
+    }
+  }
+
+  // Check that at least one agent definition exists
+  const agentsDir = path.join(root, "agents");
+  if (fs.existsSync(agentsDir)) {
+    const agents = fs.readdirSync(agentsDir).filter((f) => f.endsWith(".md"));
+    if (agents.length === 0) {
+      errors.push("No agent definition files found in agents/.");
+    }
+  }
+
+  // Validate .env
+  const envPath = path.join(root, ".env");
   if (fs.existsSync(envPath)) {
+    let env = {};
     try {
       env = parseDotEnv(fs.readFileSync(envPath, "utf8"));
     } catch (error) {
       errors.push(`Failed to read .env: ${error.message}`);
     }
-  }
 
-  for (const key of requiredEnvVars) {
-    const value = env[key];
-    if (value == null || String(value).trim() === "") {
-      errors.push(`Missing required env var ${key} in .env.`);
-      continue;
+    for (const key of requiredEnvVars) {
+      const value = env[key];
+      if (value == null || String(value).trim() === "") {
+        errors.push(`Missing required env var ${key} in .env.`);
+        continue;
+      }
+      if (isObviousPlaceholder(value)) {
+        errors.push(`Env var ${key} in .env looks like a placeholder (${value}). Replace it with a real value.`);
+      }
     }
-    if (isObviousPlaceholder(value)) {
-      errors.push(`Env var ${key} looks like a placeholder (${value}). Replace it with a real value.`);
-    }
-  }
-
-  const configPath = path.join(root, "openclaw.json");
-  if (!fs.existsSync(configPath)) {
-    errors.push("Missing openclaw.json file in repository root.");
   } else {
-    try {
-      JSON.parse(fs.readFileSync(configPath, "utf8"));
-    } catch (error) {
-      errors.push(`openclaw.json is not valid JSON: ${error.message}`);
-    }
+    errors.push("Missing .env file. Copy .env.example to .env and fill in your keys.");
   }
-
-  const workspacePath = path.join(root, "workspace");
-  ensureDirectory(workspacePath, errors);
-
-  ensureFile(
-    path.join(workspacePath, "IDENTITY.md"),
-    errors,
-  );
-  ensureFile(
-    path.join(workspacePath, "AGENTS.md"),
-    errors,
-  );
-  ensureFile(
-    path.join(workspacePath, "SOUL.md"),
-    errors,
-  );
 
   if (errors.length > 0) {
     console.error("\n[check] Setup validation failed:\n");

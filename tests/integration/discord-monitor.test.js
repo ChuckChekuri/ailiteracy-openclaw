@@ -43,7 +43,8 @@ describe('Discord Channel Monitoring', () => {
 
   test('agent reads multiple channels', async () => {
     const config = require('../../openclaw.json');
-    const monitoredChannels = config.tool_configs.discord_monitor_channels.channel_ids;
+    const guilds = config.channels.discord.guilds;
+    const monitoredChannels = Object.values(guilds).flatMap(g => Object.keys(g.channels));
     
     expect(Array.isArray(monitoredChannels)).toBe(true);
     expect(monitoredChannels.length).toBeGreaterThan(0);

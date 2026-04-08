@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProcessedDiscordEvent",
+  "type": "object",
+  "required": ["timestamp", "agent_id", "team_id", "topic_id", "thread_name", "message_content"],
+  "properties": {
+    "timestamp": {
+      "type": "string"
+    },
+    "agent_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "team_id": {
+      "type": "string"
+    },
+    "topic_id": {
+      "type": "string"
+    },
+    "thread_name": {
+      "type": "string"
+    },
+    "message_content": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

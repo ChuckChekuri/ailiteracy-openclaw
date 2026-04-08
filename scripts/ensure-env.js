@@ -1,10 +1,7 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 
 const root = process.cwd();
-const envPath = path.join(root, ".env");
-const envExamplePath = path.join(root, ".env.example");
-const workspacePath = path.join(root, "workspace");
 
 function ensureDirectory(dirPath) {
   if (!fs.existsSync(dirPath)) {
@@ -20,27 +17,26 @@ function ensureFile(filePath, content) {
   }
 }
 
+// Ensure workspace directory exists
+ensureDirectory(path.join(root, "workspace"));
+ensureDirectory(path.join(root, "agents"));
+ensureDirectory(path.join(root, "data", "raw"));
+ensureDirectory(path.join(root, "data", "processed"));
+ensureDirectory(path.join(root, "data", "outputs"));
+ensureDirectory(path.join(root, "shared"));
+ensureDirectory(path.join(root, "state"));
+
+// Ensure .env exists from .env.example
+const envExamplePath = path.join(root, ".env.example");
+const envPath = path.join(root, ".env");
+
 if (fs.existsSync(envPath)) {
   console.log("[setup] .env already exists, leaving it unchanged.");
-} else {
-  if (!fs.existsSync(envExamplePath)) {
-    console.error("[setup] Missing .env.example. Cannot create .env.");
-    process.exit(1);
-  }
+} else if (fs.existsSync(envExamplePath)) {
   fs.copyFileSync(envExamplePath, envPath);
-  console.log("[setup] Created .env from .env.example.");
+  console.log("[setup] Created .env from .env.example. Fill in your keys.");
+} else {
+  console.warn("[setup] No .env.example found. Create a .env file manually.");
 }
 
-ensureDirectory(workspacePath);
-ensureFile(
-  path.join(workspacePath, "IDENTITY.md"),
-  "# Identity\n\nName: Carbon-Based Caleb\nEmoji: :lobster:\n",
-);
-ensureFile(
-  path.join(workspacePath, "AGENTS.md"),
-  "# AGENTS\n\nDefine your agent behavior and collaboration style here.\n",
-);
-ensureFile(
-  path.join(workspacePath, "SOUL.md"),
-  "# SOUL\n\nDefine persona, voice, and reasoning preferences here.\n",
-);
+console.log("[setup] Done. Run 'npx openclaw setup' next.");
