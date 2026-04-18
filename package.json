@@ -17,7 +17,7 @@
     "env": "powershell -Command \"& ./run-openclaw.ps1 version\""
   },
   "dependencies": {
-    "openclaw": "^2026.3.28",
+    "openclaw": "^2026.4.16",
     "openclaw-studio": "^0.0.12"
   }
 }
