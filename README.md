@@ -80,13 +80,10 @@ or
 
 ## Agent Channel Responsibilities
 
-- Instructor agent:
-  - reads/writes announcements channel
 - Student agent:
-  - reads announcements
-  - writes topic-discussion
-- TA agent:
-  - reads/writes general channel
+  - Responds in #topic-dicussion
+
+
 
 ## Validation
 
@@ -96,3 +93,7 @@ npm run check
 
 - `npx openclaw doctor` can validate config.
 - Prefer running commands through `run-openclaw.ps1` or `npm run gateway` so `.env` values are loaded into the process.`r`n
+
+
+channel config in onboard screen
+1478915631016448020/1480106512813654036,1478915631016448020/1479995367754960946,1478915631016448020/1478915632723398961

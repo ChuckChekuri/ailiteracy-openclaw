@@ -1,12 +1,12 @@
 {
   "meta": {
     "lastTouchedVersion": "2026.4.15",
-    "lastTouchedAt": "2026-04-18T19:01:17.616Z"
+    "lastTouchedAt": "2026-04-18T18:44:28.991Z"
   },
   "wizard": {
-    "lastRunAt": "2026-04-18T19:01:17.313Z",
+    "lastRunAt": "2026-04-18T18:44:28.839Z",
     "lastRunVersion": "2026.4.15",
-    "lastRunCommand": "doctor",
+    "lastRunCommand": "onboard",
     "lastRunMode": "local"
   },
   "auth": {
@@ -354,9 +354,6 @@
             "apiKey": "${EXA_API_KEY}"
           }
         }
-      },
-      "openrouter": {
-        "enabled": true
       }
     }
   }

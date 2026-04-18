@@ -1,12 +1,12 @@
 {
   "meta": {
     "lastTouchedVersion": "2026.4.15",
-    "lastTouchedAt": "2026-04-18T19:01:17.616Z"
+    "lastTouchedAt": "2026-04-18T16:56:08.261Z"
   },
   "wizard": {
-    "lastRunAt": "2026-04-18T19:01:17.313Z",
+    "lastRunAt": "2026-04-18T16:56:08.099Z",
     "lastRunVersion": "2026.4.15",
-    "lastRunCommand": "doctor",
+    "lastRunCommand": "onboard",
     "lastRunMode": "local"
   },
   "auth": {
@@ -51,7 +51,7 @@
   "agents": {
     "defaults": {
       "model": {
-        "primary": "openrouter/google/gemma-4-31b-it:free"
+        "primary": "openrouter/google/gemma-4-26b-a4b-it:free"
       },
       "models": {
         "openrouter/google/gemma-4-31b-it:free": {
@@ -200,12 +200,7 @@
     },
     "auth": {
       "mode": "token",
-      "token": "${OPENCLAW_GATEWAY_TOKEN}",
-      "rateLimit": {
-        "maxAttempts": 30,
-        "windowMs": 60000,
-        "lockoutMs": 300000
-      }
+      "token": "${OPENCLAW_GATEWAY_TOKEN}"
     },
     "tailscale": {
       "mode": "off",
@@ -354,9 +349,6 @@
             "apiKey": "${EXA_API_KEY}"
           }
         }
-      },
-      "openrouter": {
-        "enabled": true
       }
     }
   }

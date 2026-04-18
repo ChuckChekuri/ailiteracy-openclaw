@@ -1,7 +1,0 @@
-# Test artifacts
-tests/videos/
-tests/screenshots/
-tests/reports/
-test-results/
-playwright-report/
-coverage/

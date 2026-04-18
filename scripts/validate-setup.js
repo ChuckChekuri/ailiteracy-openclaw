@@ -1,12 +1,13 @@
-const fs = require("node:fs");
-const path = require("node:path");
+import fs from "node:fs";
+import path from "node:path";
 
 const requiredEnvVars = [
-  "OPENAI_API_KEY",
+  "OPENROUTER_API_KEY",
   "DISCORD_GUILD_ID",
   "INFO_ANNOUNCEMENTS_CHANNEL_ID",
-  "ACTIVE_TOPICS_CATEGORY_ID",
-  "ARCHIVED_CATEGORY_ID",
+  "ACTIVE_TOPICS_CHANNEL_ID",
+  "OPENCLAW_CONFIG_PATH",
+  "OPENCLAW_STATE_DIR"
 ];
 
 const placeholderPatterns = [

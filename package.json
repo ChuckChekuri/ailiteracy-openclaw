@@ -1,9 +1,15 @@
 {
   "name": "openclaw-agents-481-07",
   "version": "1.0.0",
+  "private": true,
   "type": "module",
   "description": "Standardized Safe Setup for AI Discussions - CPSC 481.07",
+  "engines": {
+    "node": ">=20.9 <26"
+  },
+  "packageManager": "npm@11.11.0",
   "scripts": {
+    "preinstall": "node -e \"const [maj,min]=process.versions.node.split('.').map(Number); if(maj<20||(maj===20&&min<9)){console.error('Node >=20.9 required'); process.exit(1)}\"",
     "setup": "npx openclaw setup",
     "check": "node scripts/validate-setup.js",
     "start": "npx openclaw gateway --verbose",
@@ -17,7 +23,7 @@
     "env": "powershell -Command \"& ./run-openclaw.ps1 version\""
   },
   "dependencies": {
-    "openclaw": "^2026.4.16",
-    "openclaw-studio": "^0.0.12"
+    "openclaw": "2026.4.15",
+    "openclaw-studio": "0.0.12"
   }
 }
