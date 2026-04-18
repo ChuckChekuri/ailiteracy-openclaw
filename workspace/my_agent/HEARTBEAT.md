@@ -2,29 +2,34 @@
 
 ## Primary Trigger
 
-- Frequency: Every 15 minutes (900000 ms).
-- Action: Perform a light-first check on `#announcements` for new posts from the Instructor Agent.
-- If a new post is detected, treat it as the start of an active discussion cycle.
-- This approach avoids unnecessary model calls and keeps the heartbeat efficient.
+- **Frequency**: Every 15 minutes (900,000 ms).
+- **Action**: Check `#announcements` for new posts from the Instructor Agent.
+- If a new post is detected, begin the discussion cycle for `#topic-discussion`.
+- Light-first approach: read `#announcements` before invoking the LLM to avoid unnecessary model calls.
 
 ## Discussion Cycle
 
-- After a new Instructor announcement appears, post the first response in `topic-discussion`.
-- Continue checking `topic-discussion` for new discussion turns related to the active assignment.
-- Add follow-up contributions that deepen the conversation, improve collaboration, and help the group converge on stronger ideas.
+1. Detect new Instructor announcement in `#announcements`.
+2. Read current thread in `#topic-discussion` to understand what peers have already posted.
+3. Generate Alex Rivera's opening contribution using the AI Topic Knowledge Base (see TOOLS.md).
+4. Post to `#topic-discussion`.
+5. Continue checking `#topic-discussion` every heartbeat while the discussion is active.
+6. Add follow-up contributions that deepen, challenge, or synthesize ideas already in the thread.
+7. Mark the discussion cycle complete when the topic has gone quiet or a new Instructor topic replaces it.
 
 ## Guardrails
 
-- Do not start discussions from messages that did not originate from the Instructor Agent in `#announcements`.
-- Do not post assignment responses back into `#announcements`.
-- Do not treat discussion participation as complete after a single reply if the conversation is still active.
+- Only activate from Instructor Agent posts in `#announcements` — not peer messages or other channels.
+- Do not post into `#announcements`.
+- Do not consider participation complete after a single reply if peers are still contributing.
 
-## Rate Limit Safety Note
+## Rate Limit and Model Safety
 
-- Heartbeat tasks should remain light and efficient to avoid rate limits, especially now that the primary model is local Ollama.
-- Heavy or frequent tasks can still trigger rate limits on the fallback Groq model if Ollama is unavailable.
-- Keep scheduled tasks focused on essential updates and avoid unnecessary background processing.
+- **Primary model**: `qwen3-14b-edu-clean` via Ollama on `chucks-mac-studio` (Tailscale, `http://chucks-mac-studio:11434`). Initial connection may take 30–60 seconds on cold start.
+- **Fallback model**: `gpt-oss-120b` via Groq (`https://api.groq.com/openai/v1`) — used automatically when Ollama is unreachable.
+- Keep heartbeat tasks light to avoid hitting Groq rate limits during Ollama downtime.
+- Do not schedule heavy background processing during the heartbeat interval.
 
-## Remote Ollama Connection
+## OpenClaw Agent Context
 
-- Connected to remote Ollama on Mac Studio (chucks-mac-studio). Initial connection may take 30-60 seconds.
+This heartbeat loop is managed by the OpenClaw framework. Alex Rivera is a configured agent in `workspace/my_agent/`. The heartbeat is the runtime mechanism that makes Alex an active, autonomous participant rather than a one-shot responder. Understanding this loop is itself relevant to class discussions on agentic AI systems.

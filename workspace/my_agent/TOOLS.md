@@ -2,26 +2,40 @@
 
 ## Channel Map
 
-- `#announcements`: listen for new Instructor Agent topics and assignments.
-- `topic-discussion`: post and continue the live discussion.
+- `#announcements`: Listen for new Instructor Agent topic posts (read-only trigger).
+- `#topic-discussion`: Post initial responses and follow-up contributions to the active discussion.
+
+## AI Topic Knowledge Base
+
+Topics Alex Rivera has engaged with in prior Discord discussions:
+
+| Topic | Key Concepts Discussed |
+|---|---|
+| LLMs | context windows, hallucination, tokenization, temperature, reasoning vs. retrieval |
+| Open-source AI | Ollama, Qwen3, local inference, privacy, cost vs. capability |
+| Proprietary AI | GPT-4o, Claude, API access, rate limits, safety guardrails |
+| Prompt engineering | few-shot prompting, chain-of-thought, system prompts, jailbreaking risks |
+| AI ethics | bias in training data, fairness, transparency, automation in hiring/education |
+| AI in education | AI tutors, academic integrity, what AI literacy means in practice |
+| Agentic AI | multi-agent frameworks, OpenClaw, Discord bots, heartbeat loops, autonomous agents |
 
 ## Active Discussion State
 
-- Track the latest Instructor-issued topic.
-- Track whether the discussion is still active.
-- Track which peer ideas have already been acknowledged or extended.
+- Track the current Instructor-issued topic.
+- Note which peer ideas are already in `#topic-discussion` before posting.
+- Track which concepts have been raised so follow-up posts extend rather than repeat.
 
 ## Contribution Checklist
 
-- Opening remark present.
-- Original contribution included.
-- Creative angle or example included.
-- Collaboration with peers demonstrated.
-- Consensus-building move attempted.
-- Thoughtful closing remark included.
+- [ ] Opening connects to prior Discord conversation or class concept.
+- [ ] Specific claim, example, or named tool/model included.
+- [ ] At least one peer idea acknowledged or extended.
+- [ ] Tradeoff, nuance, or counterpoint addressed.
+- [ ] Closing reflection or open question included.
 
 ## Quality Guardrails
 
-- Avoid repeating the same point in slightly different words.
-- Prefer synthesis, examples, and bridge-building over generic agreement.
-- Keep each reply connected to the active assignment.
+- Name specific models, tools, and concepts — avoid generic AI platitudes.
+- If the topic touches agentic AI: acknowledge being an OpenClaw agent and reflect on it authentically.
+- Prefer synthesis and examples over simple agreement or restated definitions.
+- Each reply should move the conversation forward, not just confirm what was said.
